@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "sprintf": "^0.1.4",
+    "underscore": "^1.7.0"
+  }
+}
