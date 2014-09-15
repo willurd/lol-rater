@@ -1,25 +1,25 @@
 var _ = require('underscore');
 var sprintf = require('sprintf').sprintf;
-var tiers = require('./tiers');
-var champions = require('./champions');
+var tiers = require('./data/tiers.js');
+var champions = require('./data/champions');
 
-var ratingType = 'positions';
+var ratingType = process.argv[2] || 'goodness';
 var tierOrder = ['god', '1', '2', '3', '4'];
 
 var points = {
   goodness: {
-    'god': 781,
-    '1': 156,
-    '2': 31,
-    '3': 6,
-    '4': 1
+    'god': 606,
+    '1': 121,
+    '2': 13,
+    '3': 1,
+    '4': 0
   },
   versatility: {
-    'god': 8,
-    '1': 7,
+    'god': 13,
+    '1': 11,
     '2': 6,
-    '3': 5,
-    '4': 4
+    '3': 2,
+    '4': 1
   },
   positions: {
     'god': 1,
@@ -44,6 +44,12 @@ function eachPositionChampion(fn) {
     }
   });
 }
+
+// eachPositionChampion(function(tier, pos, champ) {
+//   if (champions.indexOf(champ) == -1) {
+//     console.log(champ);
+//   }
+// });
 
 function eachPosition(champ, fn) {
   eachPositionChampion(function(tier, position, posChamp) {
@@ -78,6 +84,7 @@ champions.forEach(function(champ) {
   scores[champ] = score;
 });
 
+// console.log(scores);
 var pairs = _.pairs(scores).sort(function(a, b) {
   if (a[1] > b[1]) {
     return -1;
@@ -88,18 +95,19 @@ var pairs = _.pairs(scores).sort(function(a, b) {
   }
 });
 
-console.log(pairs.map(function(p) {
+var result = pairs.map(function(p) {
   var positions = championPositions(p[0]);
-  var result = '';
+  // var result = '';
 
-  result += sprintf('%-20s', p[0]);
-  result += sprintf('%10d', p[1]);
-  result += ' (' + positions.map(function(pos) {
-    return pos[0] + ': ' + pos[1].join('/');
-  }).join(', ') + ')';
-
-  return result;
-  // return p[0] + ': ' + p[1] + ' (' + positions.map(function(pos) {
+  // result += sprintf('%-20s', p[0]);
+  // result += sprintf('%10d', p[1]);
+  // result += ' (' + positions.map(function(pos) {
   //   return pos[0] + ': ' + pos[1].join('/');
   // }).join(', ') + ')';
-}).join('\n'));
+
+  // return result;
+  return p[0] + ': ' + p[1] + ' (' + positions.map(function(pos) {
+    return pos[0] + ': ' + pos[1].join('/');
+  }).join(', ') + ')';
+}).join('\n');
+console.log(result);

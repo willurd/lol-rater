@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "jsdom": "^1.0.0-pre.6",
     "sprintf": "^0.1.4",
-    "underscore": "^1.7.0"
+    "underscore": "^1.7.0",
+    "wget": "0.0.1"
   }
 }
