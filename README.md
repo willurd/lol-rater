@@ -4,7 +4,9 @@ This code is super alpha right now.
 
 ## Usage
 
-### Downloading new tiers (currently only supports http://www.nerfplz.com):
+### Downloading new tiers
+
+This currently only supports http://www.nerfplz.com.
 
 This information is turned into a JSON object and saved to `data/tiers.js`.
 
